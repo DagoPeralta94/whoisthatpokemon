@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        changeTextPokemon()
         binding.btSubmit.setOnClickListener {
             showPokemon()
         }
@@ -38,15 +37,9 @@ class MainActivity : AppCompatActivity() {
         return DataPokemon.pokemonList[(1 until DataPokemon.pokemonList.size).random()]
     }
 
-    private fun changeTextPokemon() {
-        binding.txtPokeInput.addTextChangedListener {
-            binding.txtPokeName.text = it
-        }
-    }
-
     private fun showPokemon() {
         with(binding) {
-            if (txtPokeName.text.toString() == pokechoosed) {
+            if (txtPokeInput.text.toString() == pokechoosed) {
                 imgPokeFront.visibility = View.GONE
                 btSubmit.visibility = View.GONE
                 btNextPokemon.visibility = View.VISIBLE
