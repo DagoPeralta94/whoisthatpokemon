@@ -15,6 +15,7 @@ import com.example.whoisthatpokemon.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
+    private var lives: Int = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity() {
                 btNextPokemon.visibility = View.VISIBLE
             }else{
                 Toast.makeText(txtPokeInput.context, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show()
+                lives -= 1
+                binding.txtLive.text = lives.toString()
             }
         }
     }

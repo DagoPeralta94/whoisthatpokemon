@@ -8,6 +8,26 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/txt_live_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/txt_live"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginVertical="5dp"
+        android:layout_marginEnd="10dp"
+        android:text="Lives:"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/txt_live"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20sp"
+        android:layout_margin="5dp"
+        android:text="3"/>
+
+    <TextView
         android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
