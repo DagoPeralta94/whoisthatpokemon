@@ -3,6 +3,7 @@ package com.example.whoisthatpokemon
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -12,80 +13,104 @@ import androidx.core.widget.addTextChangedListener
 import com.example.whoisthatpokemon.data.DataPokemon
 import com.example.whoisthatpokemon.data.RandomPokemon
 import com.example.whoisthatpokemon.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private var lives: Int = 3
     private var score: Int = 0
     private var pokechoosed: String = "Charmander"
+    private var counterTime: Long = 60000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         changeTextPokemon()
-        binding.btSubmit.setOnClickListener{
+        binding.btSubmit.setOnClickListener {
             showPokemon()
         }
         binding.btNextPokemon.setOnClickListener {
             nextPokemon()
         }
-
+        counterDown()
     }
 
-    private fun chooseRandomPoke() : RandomPokemon {
+    private fun chooseRandomPoke(): RandomPokemon {
         return DataPokemon.pokemonList[(1 until DataPokemon.pokemonList.size).random()]
     }
 
-    private fun changeTextPokemon(){
+    private fun changeTextPokemon() {
         binding.txtPokeInput.addTextChangedListener {
             binding.txtPokeName.text = it
         }
     }
 
-    private fun showPokemon(){
-        with(binding){
-            if(txtPokeName.text.toString()==pokechoosed){
+    private fun showPokemon() {
+        with(binding) {
+            if (txtPokeName.text.toString() == pokechoosed) {
                 imgPokeFront.visibility = View.GONE
                 btSubmit.visibility = View.GONE
                 btNextPokemon.visibility = View.VISIBLE
                 score += 10
                 txtScore.text = score.toString()
-            }else{
+            } else {
                 Toast.makeText(txtPokeInput.context, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show()
                 lives -= 1
                 txtLive.text = lives.toString()
-                if(lives == 0) run {
-                    val builder = AlertDialog.Builder(txtPokeInput.context)
-                    builder.setTitle("GAME OVER")
-                    builder.setMessage("SCORE: $score\nDo you want to try again?")
-                    builder.setIcon(android.R.drawable.ic_dialog_alert)
+                if (lives == 0) {
+                    alertDialogShow()
+                    object : CountDownTimer(1000, 1000) {
+                        override fun onTick(millisUntilFinished: Long) {
+                            binding.txtTime.text = (millisUntilFinished / 1000).toString()
+                        }
 
-                    builder.setPositiveButton("YES") { dialogInterface, which ->
-                        lives = 3
-                        score = 0
-                        txtScore.text = score.toString()
-                        txtLive.text = lives.toString()
-                        txtPokeInput.text.clear()
-                        nextPokemon()
+                        override fun onFinish() {
+                            alertDialogShow()
+                        }
                     }
-                    builder.setNegativeButton("EXIT") { dialogInterface, which ->
-                        finish()
-                    }
-                    val alertDialog: AlertDialog = builder.create()
-                    alertDialog.setCancelable(false)
-                    alertDialog.show()
-
                 }
             }
         }
     }
 
-    private fun nextPokemon(){
-        with(binding){
+    private fun alertDialogShow() {
+        with(binding) {
+            run {
+                if(lives>0 && score!= 0){
+                    score += (lives * 10)
+                }
+                val builder = AlertDialog.Builder(txtPokeInput.context)
+                builder.setTitle("GAME OVER")
+                builder.setMessage("SCORE: $score\nDo you want to try again?")
+                builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+                builder.setPositiveButton("YES") { dialogInterface, which ->
+                    lives = 3
+                    score = 0
+                    txtScore.text = score.toString()
+                    txtLive.text = lives.toString()
+                    txtPokeInput.text.clear()
+                    nextPokemon()
+                    counterDown()
+                }
+                builder.setNegativeButton("EXIT") { dialogInterface, which ->
+                    finish()
+                }
+                val alertDialog: AlertDialog = builder.create()
+                alertDialog.setCancelable(false)
+                alertDialog.show()
+            }
+        }
+    }
+
+    private fun nextPokemon() {
+        with(binding) {
             choosePhotos()
             imgPokeFront.visibility = View.VISIBLE
             btSubmit.visibility = View.VISIBLE
@@ -94,8 +119,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun choosePhotos() : Any? {
-        var x = when(chooseRandomPoke().id) {
+    private fun choosePhotos(): Any? {
+        var x = when (chooseRandomPoke().id) {
             1 -> {
                 binding.imgPokeFront.setImageResource(R.drawable.charmander)
                 binding.imgPokeBack.setImageResource(R.drawable.charmander)
@@ -256,4 +281,19 @@ class MainActivity : AppCompatActivity() {
         return x
     }
 
+    private fun counterDown() {
+        object : CountDownTimer(counterTime, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                if (lives > 0) {
+                    binding.txtTime.text = (millisUntilFinished / 1000).toString()
+                } else {
+                    binding.txtTime.text = "0"
+                    cancel()
+                }
+            }
+            override fun onFinish() {
+                alertDialogShow()
+            }
+        }.start()
+    }
 }
