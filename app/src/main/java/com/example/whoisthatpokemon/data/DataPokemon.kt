@@ -4,29 +4,60 @@ class DataPokemon {
     companion object {
         val pokemonList = listOf<RandomPokemon>(
             RandomPokemon(
-                1,
-                "Charmander",
-                "R.drawable.charmander"
+                0,
+                "Uknow"
             ),
             RandomPokemon(
-                3,
-                "Charizard",
-                "R.drawable.charizard"
+                1,
+                "Charmander"
             ),
             RandomPokemon(
                 2,
-                "Charmeleon",
-                "R.drawable.charizard"
+                "Charmeleon"
+            ),
+            RandomPokemon(
+                3,
+                "Charizard"
             ),
             RandomPokemon(
                 4,
-                "Pikachu",
-                "R.drawable.charizard"
+                "Pikachu"
             ),
             RandomPokemon(
                 5,
-                "Raichu",
-                "R.drawable.charizard"
+                "Raichu"
+            ),
+            RandomPokemon(
+                6,
+                "Bulbasaur"
+            ),
+            RandomPokemon(
+                7,
+                "Ivysaur"
+            ),
+            RandomPokemon(
+                8,
+                "Venusaur"
+            ),
+            RandomPokemon(
+                9,
+                "Squirtle"
+            ),
+            RandomPokemon(
+                10,
+                "Wartortle"
+            ),
+            RandomPokemon(
+                11,
+                "Blastoise"
+            ),
+            RandomPokemon(
+                12,
+                "Caterpie"
+            ),
+            RandomPokemon(
+                13,
+                "Metapod"
             )
         )
     }

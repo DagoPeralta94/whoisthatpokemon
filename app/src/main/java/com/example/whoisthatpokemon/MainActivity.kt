@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     private var lives: Int = 3
     private var score: Int = 0
+    private var pokechoosed: String = "Charmander"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun chooseRandomPoke() : RandomPokemon {
-        return DataPokemon.pokemonList[(0 until DataPokemon.pokemonList.size).random()]
+        return DataPokemon.pokemonList[(1 until DataPokemon.pokemonList.size).random()]
     }
 
     private fun changeTextPokemon(){
@@ -47,16 +48,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun showPokemon(){
         with(binding){
-            if(txtPokeName.text.toString()=="Charmander"){
+            if(txtPokeName.text.toString()==pokechoosed){
                 imgPokeFront.visibility = View.GONE
                 btSubmit.visibility = View.GONE
                 btNextPokemon.visibility = View.VISIBLE
                 score += 10
-                binding.txtScore.text = score.toString()
+                txtScore.text = score.toString()
             }else{
                 Toast.makeText(txtPokeInput.context, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show()
                 lives -= 1
-                binding.txtLive.text = lives.toString()
+                txtLive.text = lives.toString()
                 if(lives == 0) run {
                     val builder = AlertDialog.Builder(txtPokeInput.context)
                     builder.setTitle("GAME OVER")
@@ -66,8 +67,10 @@ class MainActivity : AppCompatActivity() {
                     builder.setPositiveButton("YES") { dialogInterface, which ->
                         lives = 3
                         score = 0
-                        binding.txtScore.text = score.toString()
-                        binding.txtLive.text = lives.toString()
+                        txtScore.text = score.toString()
+                        txtLive.text = lives.toString()
+                        txtPokeInput.text.clear()
+                        nextPokemon()
                     }
                     builder.setNegativeButton("EXIT") { dialogInterface, which ->
                         finish()
@@ -87,6 +90,7 @@ class MainActivity : AppCompatActivity() {
             imgPokeFront.visibility = View.VISIBLE
             btSubmit.visibility = View.VISIBLE
             btNextPokemon.visibility = View.GONE
+            txtPokeInput.text.clear()
         }
     }
 
@@ -96,26 +100,86 @@ class MainActivity : AppCompatActivity() {
             1 -> {
                 binding.imgPokeFront.setImageResource(R.drawable.charmander)
                 binding.imgPokeBack.setImageResource(R.drawable.charmander)
+                pokechoosed = DataPokemon.pokemonList[1].pokemonName
+                println(pokechoosed)
             }
             2 -> {
                 binding.imgPokeFront.setImageResource(R.drawable.charmeleon)
                 binding.imgPokeBack.setImageResource(R.drawable.charmeleon)
+                pokechoosed = DataPokemon.pokemonList[2].pokemonName
+                println(pokechoosed)
             }
             3 -> {
                 binding.imgPokeFront.setImageResource(R.drawable.charizard)
                 binding.imgPokeBack.setImageResource(R.drawable.charizard)
+                pokechoosed = DataPokemon.pokemonList[3].pokemonName
+                println(pokechoosed)
             }
             4 -> {
                 binding.imgPokeFront.setImageResource(R.drawable.pikachu)
                 binding.imgPokeBack.setImageResource(R.drawable.pikachu)
+                pokechoosed = DataPokemon.pokemonList[4].pokemonName
+                println(pokechoosed)
             }
             5 -> {
                 binding.imgPokeFront.setImageResource(R.drawable.raichu)
                 binding.imgPokeBack.setImageResource(R.drawable.raichu)
+                pokechoosed = DataPokemon.pokemonList[5].pokemonName
+                println(pokechoosed)
+            }
+            6 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.bulbasaur)
+                binding.imgPokeBack.setImageResource(R.drawable.bulbasaur)
+                pokechoosed = DataPokemon.pokemonList[6].pokemonName
+                println(pokechoosed)
+            }
+            7 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.ivysaur)
+                binding.imgPokeBack.setImageResource(R.drawable.ivysaur)
+                pokechoosed = DataPokemon.pokemonList[7].pokemonName
+                println(pokechoosed)
+            }
+            8 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.venusaur)
+                binding.imgPokeBack.setImageResource(R.drawable.venusaur)
+                pokechoosed = DataPokemon.pokemonList[8].pokemonName
+                println(pokechoosed)
+            }
+            9 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.squirtle)
+                binding.imgPokeBack.setImageResource(R.drawable.squirtle)
+                pokechoosed = DataPokemon.pokemonList[9].pokemonName
+                println(pokechoosed)
+            }
+            10 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.wartortle)
+                binding.imgPokeBack.setImageResource(R.drawable.wartortle)
+                pokechoosed = DataPokemon.pokemonList[10].pokemonName
+                println(pokechoosed)
+            }
+            11 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.blastoise)
+                binding.imgPokeBack.setImageResource(R.drawable.blastoise)
+                pokechoosed = DataPokemon.pokemonList[11].pokemonName
+                println(pokechoosed)
+            }
+            12 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.caterpie)
+                binding.imgPokeBack.setImageResource(R.drawable.caterpie)
+                pokechoosed = DataPokemon.pokemonList[12].pokemonName
+                println(pokechoosed)
+            }
+            13 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.metapod)
+                binding.imgPokeBack.setImageResource(R.drawable.metapod)
+                pokechoosed = DataPokemon.pokemonList[13].pokemonName
+                println(pokechoosed)
             }
             else -> {
                 binding.imgPokeFront.setImageResource(R.drawable.charizard)
                 binding.imgPokeBack.setImageResource(R.drawable.charizard)
+                pokechoosed = DataPokemon.pokemonList[0].pokemonName
+                println(pokechoosed)
             }
         }
         return x
