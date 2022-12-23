@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
         android:background="@color/white"
-        android:alpha="0.3"
+        android:alpha="0.8"
         android:hint="Name Pokemon"
         android:gravity="center"
         />
