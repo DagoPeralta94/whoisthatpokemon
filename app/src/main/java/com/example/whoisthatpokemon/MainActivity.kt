@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private var lives: Int = 3
     private var score: Int = 0
     private var pokechoosed: String = "Charmander"
-    private var counterTime: Long = 60000
+    private var counterTime: Long = 61000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
