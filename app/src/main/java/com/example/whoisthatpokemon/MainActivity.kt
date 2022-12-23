@@ -94,7 +94,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun choosePhotos() : Any? {
         var x = when(chooseRandomPoke().id) {
             1 -> {
@@ -173,6 +172,78 @@ class MainActivity : AppCompatActivity() {
                 binding.imgPokeFront.setImageResource(R.drawable.metapod)
                 binding.imgPokeBack.setImageResource(R.drawable.metapod)
                 pokechoosed = DataPokemon.pokemonList[13].pokemonName
+                println(pokechoosed)
+            }
+            14 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.butterfree)
+                binding.imgPokeBack.setImageResource(R.drawable.butterfree)
+                pokechoosed = DataPokemon.pokemonList[14].pokemonName
+                println(pokechoosed)
+            }
+            15 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.weedle)
+                binding.imgPokeBack.setImageResource(R.drawable.weedle)
+                pokechoosed = DataPokemon.pokemonList[15].pokemonName
+                println(pokechoosed)
+            }
+            16 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.kakuna)
+                binding.imgPokeBack.setImageResource(R.drawable.kakuna)
+                pokechoosed = DataPokemon.pokemonList[16].pokemonName
+                println(pokechoosed)
+            }
+            17 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.beedrill)
+                binding.imgPokeBack.setImageResource(R.drawable.beedrill)
+                pokechoosed = DataPokemon.pokemonList[17].pokemonName
+                println(pokechoosed)
+            }
+            18 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.pidgey)
+                binding.imgPokeBack.setImageResource(R.drawable.pidgey)
+                pokechoosed = DataPokemon.pokemonList[18].pokemonName
+                println(pokechoosed)
+            }
+            19 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.pidgeotto)
+                binding.imgPokeBack.setImageResource(R.drawable.pidgeotto)
+                pokechoosed = DataPokemon.pokemonList[19].pokemonName
+                println(pokechoosed)
+            }
+            20 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.pidgeot)
+                binding.imgPokeBack.setImageResource(R.drawable.pidgeot)
+                pokechoosed = DataPokemon.pokemonList[20].pokemonName
+                println(pokechoosed)
+            }
+            21 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.rattata)
+                binding.imgPokeBack.setImageResource(R.drawable.rattata)
+                pokechoosed = DataPokemon.pokemonList[21].pokemonName
+                println(pokechoosed)
+            }
+            22 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.raticate)
+                binding.imgPokeBack.setImageResource(R.drawable.raticate)
+                pokechoosed = DataPokemon.pokemonList[22].pokemonName
+                println(pokechoosed)
+            }
+            23 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.spearow)
+                binding.imgPokeBack.setImageResource(R.drawable.spearow)
+                pokechoosed = DataPokemon.pokemonList[23].pokemonName
+                println(pokechoosed)
+            }
+            24 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.fearow)
+                binding.imgPokeBack.setImageResource(R.drawable.fearow)
+                pokechoosed = DataPokemon.pokemonList[24].pokemonName
+                println(pokechoosed)
+            }
+            25 -> {
+                binding.imgPokeFront.setImageResource(R.drawable.ekans)
+                binding.imgPokeBack.setImageResource(R.drawable.ekans)
+                pokechoosed = DataPokemon.pokemonList[25].pokemonName
                 println(pokechoosed)
             }
             else -> {

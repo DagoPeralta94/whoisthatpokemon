@@ -58,6 +58,54 @@ class DataPokemon {
             RandomPokemon(
                 13,
                 "Metapod"
+            ),
+            RandomPokemon(
+                14,
+                "Butterfree"
+            ),
+            RandomPokemon(
+                15,
+                "Weedle"
+            ),
+            RandomPokemon(
+                16,
+                "Kakuna"
+            ),
+            RandomPokemon(
+                17,
+                "Beedrill"
+            ),
+            RandomPokemon(
+                18,
+                "Pidgey"
+            ),
+            RandomPokemon(
+                19,
+                "Pidgeotto"
+            ),
+            RandomPokemon(
+                20,
+                "Pidgeot"
+            ),
+            RandomPokemon(
+                21,
+                "Rattata"
+            ),
+            RandomPokemon(
+                22,
+                "Raticate"
+            ),
+            RandomPokemon(
+                23,
+                "Spearow"
+            ),
+            RandomPokemon(
+                24,
+                "Fearow"
+            ),
+            RandomPokemon(
+                25,
+                "Ekans"
             )
         )
     }
