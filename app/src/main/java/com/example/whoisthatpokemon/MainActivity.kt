@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
     private var lives: Int = 3
+    private var score: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity() {
                 imgPokeFront.visibility = View.GONE
                 btSubmit.visibility = View.GONE
                 btNextPokemon.visibility = View.VISIBLE
+                score += 10
+                binding.txtScore.text = score.toString()
             }else{
                 Toast.makeText(txtPokeInput.context, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show()
                 lives -= 1
@@ -57,28 +60,22 @@ class MainActivity : AppCompatActivity() {
                 if(lives == 0) run {
                     val builder = AlertDialog.Builder(txtPokeInput.context)
                     builder.setTitle("GAME OVER")
-                    builder.setMessage("SCORE: ")
+                    builder.setMessage("SCORE: $score\nDo you want to try again?")
                     builder.setIcon(android.R.drawable.ic_dialog_alert)
 
-                    builder.setPositiveButton("Yes") { dialogInterface, which ->
-                        Toast.makeText(applicationContext, "clicked yes", Toast.LENGTH_LONG).show()
+                    builder.setPositiveButton("YES") { dialogInterface, which ->
+                        lives = 3
+                        score = 0
+                        binding.txtScore.text = score.toString()
+                        binding.txtLive.text = lives.toString()
                     }
-                    //performing cancel action
-                    builder.setNeutralButton("Cancel") { dialogInterface, which ->
-                        Toast.makeText(
-                            applicationContext,
-                            "clicked cancel\n operation cancel",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                    builder.setNegativeButton("No") { dialogInterface, which ->
-                        Toast.makeText(applicationContext, "clicked No", Toast.LENGTH_LONG).show()
+                    builder.setNegativeButton("EXIT") { dialogInterface, which ->
+                        finish()
                     }
                     val alertDialog: AlertDialog = builder.create()
                     alertDialog.setCancelable(false)
                     alertDialog.show()
-                    lives = 3
-                    binding.txtLive.text = lives.toString()
+
                 }
             }
         }
