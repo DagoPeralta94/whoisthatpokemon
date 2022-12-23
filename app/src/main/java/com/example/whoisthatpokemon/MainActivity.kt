@@ -1,22 +1,15 @@
 package com.example.whoisthatpokemon
 
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.graphics.drawable.toDrawable
 import androidx.core.widget.addTextChangedListener
 import com.example.whoisthatpokemon.data.DataPokemon
 import com.example.whoisthatpokemon.data.RandomPokemon
 import com.example.whoisthatpokemon.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
