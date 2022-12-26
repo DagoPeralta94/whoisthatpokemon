@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         binding.btSubmit.setOnClickListener {
-            showPokemon()
+            verifyPokemon()
         }
         binding.btNextPokemon.setOnClickListener {
             nextPokemon()
@@ -37,62 +37,67 @@ class MainActivity : AppCompatActivity() {
         return DataPokemon.pokemonList[(1 until DataPokemon.pokemonList.size).random()]
     }
 
-    private fun showPokemon() {
+    private fun verifyPokemon() {
         with(binding) {
             if (txtPokeInput.text.toString() == pokechoosed) {
-                imgPokeFront.visibility = View.GONE
-                btSubmit.visibility = View.GONE
-                btNextPokemon.visibility = View.VISIBLE
-                score += 10
-                txtScore.text = score.toString()
+                setCorrectPokemon()
             } else {
                 Toast.makeText(txtPokeInput.context, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show()
                 lives -= 1
                 txtLive.text = lives.toString()
-                if (lives == 0) {
-                    alertDialogShow()
-                    object : CountDownTimer(1000, 1000) {
-                        override fun onTick(millisUntilFinished: Long) {
-                            binding.txtTime.text = (millisUntilFinished / 1000).toString()
-                        }
-
-                        override fun onFinish() {
-                            alertDialogShow()
-                        }
-                    }
-                }
+                verifyLives()
             }
         }
     }
 
-    private fun alertDialogShow() {
-        with(binding) {
-            run {
-                if(lives>0 && score!= 0){
-                    score += (lives * 10)
-                }
-                val builder = AlertDialog.Builder(txtPokeInput.context)
-                builder.setTitle("GAME OVER")
-                builder.setMessage("SCORE: $score\nDo you want to try again?")
-                builder.setIcon(android.R.drawable.ic_dialog_alert)
-
-                builder.setPositiveButton("YES") { dialogInterface, which ->
-                    lives = 3
-                    score = 0
-                    txtScore.text = score.toString()
-                    txtLive.text = lives.toString()
-                    txtPokeInput.text.clear()
-                    nextPokemon()
-                    counterDown()
-                }
-                builder.setNegativeButton("EXIT") { dialogInterface, which ->
-                    finish()
-                }
-                val alertDialog: AlertDialog = builder.create()
-                alertDialog.setCancelable(false)
-                alertDialog.show()
-            }
+    private fun setCorrectPokemon() {
+        with(binding){
+            imgPokeFront.visibility = View.GONE
+            btSubmit.visibility = View.GONE
+            btNextPokemon.visibility = View.VISIBLE
+            score += 10
+            txtScore.text = score.toString()
         }
+    }
+
+    private fun verifyLives() {
+        if (lives == 0) {
+            alertDialogShow()
+        }
+    }
+
+    private fun alertDialogShow() {
+        setScoreSpecial()
+        val builder = AlertDialog.Builder(binding.txtPokeInput.context)
+        builder.setTitle("GAME OVER")
+        builder.setMessage("SCORE: $score\nDo you want to try again?")
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+        builder.setPositiveButton("YES") { dialogInterface, which ->
+            setContinueGame()
+        }
+        builder.setNegativeButton("EXIT") { dialogInterface, which ->
+            finish()
+        }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+    }
+
+    private fun setScoreSpecial() {
+        if (lives > 0 && score != 0) {
+            score += (lives * 10)
+        }
+    }
+
+    private fun setContinueGame() {
+        lives = 3
+        score = 0
+        binding.txtScore.text = score.toString()
+        binding.txtLive.text = lives.toString()
+        binding.txtPokeInput.text.clear()
+        nextPokemon()
+        counterDown()
     }
 
     private fun nextPokemon() {
